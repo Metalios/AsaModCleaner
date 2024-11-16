@@ -1,0 +1,80 @@
+﻿<Window x:Class="AsaModCleaner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsaModCleaner"
+        mc:Ignorable="d"
+        Title="ASA Mod Cleaner" Height="600" Width="800" WindowStyle="ThreeDBorderWindow" Icon="Assets/asa_mod_cleaner.ico">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="WhiteSmoke"/>
+            <GradientStop Color="#FF8E8E8E" Offset="1"/>
+            <GradientStop Color="#FFE3E2E2" Offset="0.513"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid Margin="0,0,0,-6">
+        <!-- Header with Logo -->
+        <Border Height="100" VerticalAlignment="Top" Background="#333333" CornerRadius="0,0,10,10">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="pack://application:,,,/Assets/asa_mod_cleaner.png" Height="64" Margin="10"/>
+                <TextBlock Text="ASA Mod Cleaner" Foreground="WhiteSmoke" FontSize="36" FontWeight="Bold" VerticalAlignment="Center" />
+            </StackPanel>
+        </Border>
+
+        <!-- Mod List Section -->
+        <Border Margin="20,120,20,80" CornerRadius="10" Background="#2E2E2E">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Installed Mods" FontSize="20" Foreground="WhiteSmoke" Margin="10" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="Select All" Width="70" Height="22" HorizontalAlignment="Left" Background="LightBlue"
+                        Foreground="Black" FontWeight="Bold" Click="SelectAllButton_Click" Margin="10,0,0,10"/>
+                <Button Content="Refresh" Width="70" Height="22" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10"
+                        Background="Turquoise" BorderThickness="0" Foreground="Black" FontWeight="Bold" Click="RefreshButton_Click"/>
+                </StackPanel>
+                <ListView x:Name="ModList" Margin="10" Background="#3E3E3E" BorderThickness="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalAlignment="Center" Margin="5" Grid.Column="0" IsChecked="{Binding IsSelected}"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="1">
+                                    <TextBlock Text="{Binding Details.Name}" FontWeight="Bold" Foreground="WhiteSmoke" VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding DateInstalledLocal, StringFormat='Installed On: {0}'}" Foreground="#99DDFF" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Border>
+
+        <!-- Progress Bar -->
+        <ProgressBar x:Name="CleaningProgressBar" Height="20" Margin="20,0,20,80" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+
+        <!-- Clean Button -->
+        <Button Content="Clean" Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,16"
+                Background="LimeGreen" BorderThickness="0" Foreground="Black" FontWeight="Bold" FontSize="20" Click="CleanButton_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
+        <!-- Status Feedback Label -->
+        <TextBlock x:Name="StatusLabel" Text="" FontSize="16" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" FontWeight="Bold">
+            <TextBlock.Effect>
+                <DropShadowEffect/>
+            </TextBlock.Effect>
+        </TextBlock>
+    </Grid>
+</Window>
