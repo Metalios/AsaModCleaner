@@ -22,7 +22,7 @@ namespace AsaModCleaner
 
             // Set up the logger first, based on the environment
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Error()
                 .WriteTo.File($"logs\\{environment}_application_log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 

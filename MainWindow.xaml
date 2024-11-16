@@ -6,6 +6,23 @@
         xmlns:local="clr-namespace:AsaModCleaner"
         mc:Ignorable="d"
         Title="ASA Mod Cleaner" Height="600" Width="800" WindowStyle="ThreeDBorderWindow" Icon="Assets/asa_mod_cleaner.ico">
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
+    <Window.Resources>
+        <!-- Style to prevent ListViewItems from being visually selected -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="IsHitTestVisible" Value="True"/> <!-- Ensure child elements can still be interacted with -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ContentPresenter /> <!-- Render the item without any selection visuals -->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="WhiteSmoke"/>
@@ -47,7 +64,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <CheckBox VerticalAlignment="Center" Margin="5" Grid.Column="0" IsChecked="{Binding IsSelected}"/>
+                                <CheckBox VerticalAlignment="Center" Margin="5" Grid.Column="0" IsChecked="{Binding IsSelected}"
+                                          Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="1">
                                     <TextBlock Text="{Binding Details.Name}" FontWeight="Bold" Foreground="WhiteSmoke" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding DateInstalledLocal, StringFormat='Installed On: {0}'}" Foreground="#99DDFF" VerticalAlignment="Center"/>

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using AsaModCleaner.Models;
 using AsaModCleaner.Services;
 using Microsoft.Extensions.Logging;
@@ -73,6 +74,26 @@ namespace AsaModCleaner
             ProcessCleaningQueue();
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox { DataContext: InstalledMod selectedMod }) return;
+            // Add the selected item to the ListView's SelectedItems if not already present
+            if (!ModList.SelectedItems.Contains(selectedMod))
+            {
+                ModList.SelectedItems.Add(selectedMod);
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox { DataContext: InstalledMod selectedMod }) return;
+            // Remove the item from the ListView's SelectedItems when unchecked
+            if (ModList.SelectedItems.Contains(selectedMod))
+            {
+                ModList.SelectedItems.Remove(selectedMod);
+            }
+        }
+
         private async void ProcessCleaningQueue()
         {
             // Show the progress bar and reset its value
@@ -109,6 +130,9 @@ namespace AsaModCleaner
                     // Remove the mod from the InstalledMods list and update the UI
                     var installedMods = (List<InstalledMod>)ModList.ItemsSource!;
                     installedMods.Remove(modToClean);
+
+                    var changedLibrary = new Library{InstalledMods = installedMods};
+                    _gameService.SaveModLibraryChanges(changedLibrary, installDir!);
 
                     // Refresh the ListView to reflect changes
                     ModList.ItemsSource = null; // Disconnect the binding temporarily
