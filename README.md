@@ -85,7 +85,7 @@ Contributions are welcome! Feel free to open issues or submit pull requests to h
 ASA Mod Cleaner is not endorsed by or affiliated with Steam, Studio Wildcard (makers of ARK: Survival Ascended), or any of their affiliates. All product names, trademarks, and registered trademarks are property of their respective owners.
 
 ## License
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Contact
 If you encounter issues or have questions, please open an issue in the GitHub repository, or reach out directly.
