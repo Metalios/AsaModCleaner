@@ -1,6 +1,6 @@
 # ASA Mod Cleaner
 
-**ASA Mod Cleaner** is a powerful tool designed for players of **ARK: Survival Ascended** on the PC/Steam platform. The tool provides a convenient way to manage all mods that have been installed including those installed automatically using the **Cosmetic Dynamic Downloading** feature. With ASA Mod Cleaner, players can easily clean up their mods, keep their game environment organized, and disable cosmetic downloading when needed.
+**ASA Mod Cleaner** is a powerful tool designed for players of **ARK: Survival Ascended** on the PC/Steam platform. The tool provides a convenient way to manage all mods that have been installed, including those installed automatically using the **Cosmetic Dynamic Downloading** feature. With ASA Mod Cleaner, players can easily clean up their mods, keep their game environment organized, and disable cosmetic downloading when needed.
 
 ## Features
 
@@ -42,7 +42,6 @@ ARK: Survival Ascended's **Cosmetic Dynamic Downloading** can automatically inst
 - The **Cosmetic Dynamic Downloading disabling feature** is currently on the roadmap. When available, ASA Mod Cleaner will ensure that ARK is **not running** before performing this operation.
 
 ## Requirements
-- **SteamWorks.NET** for Steam integration.
 - **.NET 8 Desktop Runtime** is required.
 
 ## Installation
@@ -79,14 +78,17 @@ You can install ASA Mod Cleaner either through the **ASAMC_Setup.exe installer**
 ### Can I contribute to ASA Mod Cleaner?
 Absolutely! Contributions are welcome. Feel free to open issues or submit pull requests in the GitHub repository to help improve ASA Mod Cleaner.
 
-
 ## Contributions
 Contributions are welcome! Feel free to open issues or submit pull requests to help improve ASA Mod Cleaner.
 
+## Disclaimer
+ASA Mod Cleaner is not endorsed by or affiliated with Steam, Studio Wildcard (makers of ARK: Survival Ascended), or any of their affiliates. All product names, trademarks, and registered trademarks are property of their respective owners.
 
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+## Contact
 If you encounter issues or have questions, please open an issue in the GitHub repository, or reach out directly.
 
 ---
 **ASA Mod Cleaner** makes ARK: Survival Ascended mod management easy, freeing players from the hassle of manually identifying and uninstalling unwanted mods. Keep your game clean, organized, and under your control!
-
-
