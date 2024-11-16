@@ -27,7 +27,7 @@
 ARK: Survival Ascended's **Cosmetic Dynamic Downloading** can automatically install mods as players connect to servers. Unfortunately, ARK doesn't always display which mods were downloaded, making it hard to clean up afterwards. **ASA Mod Cleaner** solves this problem by:
 
 1. **Disabling Cosmetic Dynamic Downloading** (via an in-game setting or soon directly from the app).
-2. Allowing users to **uninstall mods** that were installed dynamically.
+2. Allowing users to **uninstall mods** that were installed both manually and dynamically.
 3. **Selective Cleaning** to remove only specific mods or a full clean to remove all downloaded mods.
 
 ## Usage Instructions
