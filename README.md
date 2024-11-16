@@ -70,7 +70,7 @@ No, it is not necessary to fully restart ARK after uninstalling mods. However, w
 You need to have **.NET 8 Desktop Runtime** installed to use ASA Mod Cleaner. Additionally, **SteamWorks.NET** is used to interact with the Steam client for retrieving the ARK installation directory.
 
 ### Is there a feature to disable dynamic downloading?
-Currently, ASA Mod Cleaner allows users to disable dynamic downloading through the in-game setting. We have an upcoming feature on our roadmap that will allow users to disable dynamic cosmetic downloading directly through the app. This feature will require that ARK is not running when the change is made.
+Currently, ASA Mod Cleaner requires users to disable dynamic downloading through the in-game setting. We have an upcoming feature on our roadmap that will allow users to disable dynamic cosmetic downloading directly through the app. This feature will require that ARK is not running when the change is made.
 
 ### How do I install ASA Mod Cleaner?
 You can install ASA Mod Cleaner either through the **ASAMC_Setup.exe installer** for a quick setup or by downloading the **zip file**, extracting it, and running ASA Mod Cleaner from the extracted folder.
