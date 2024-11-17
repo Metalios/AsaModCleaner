@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:AsaModCleaner"
         mc:Ignorable="d"
         Title="ASA Mod Cleaner" Height="600" Width="800" WindowStyle="ThreeDBorderWindow" Icon="Assets/asa_mod_cleaner.ico">
-    <Window.Effect>
-        <DropShadowEffect/>
-    </Window.Effect>
     <Window.Resources>
         <!-- Style to prevent ListViewItems from being visually selected -->
         <Style TargetType="ListViewItem">
