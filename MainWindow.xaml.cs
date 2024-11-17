@@ -14,7 +14,7 @@ namespace AsaModCleaner
     {
         private readonly GameService _gameService;
         private readonly ILogger<MainWindow> _logger;
-        private readonly Queue<InstalledMod> _modsToCleanQueue = new Queue<InstalledMod>();
+        private readonly Queue<InstalledMod> _modsToCleanQueue = new();
 
 
         public MainWindow(GameService gameService, ILogger<MainWindow> logger)
@@ -27,10 +27,39 @@ namespace AsaModCleaner
             Loaded += MainWindow_Loaded;
         }
 
-        // Loaded Event Handler
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void EnableButtons(bool enabled)
         {
-            LoadModList();
+            SelectAllButton.IsEnabled = enabled;
+            RefreshButton.IsEnabled = enabled;
+            CleanButton.IsEnabled = enabled;
+        }
+
+        // Loaded Event Handler
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EnableButtons(false);
+
+                // Run the initialization logic in a separate thread to avoid blocking the UI
+                var success = await Task.Run(() => _gameService.Initialize());
+
+                if (success)
+                {
+                    // Proceed with the follow-up task if initialization was successful
+                    LoadModList();
+                    EnableButtons(true);
+                }
+                else
+                {
+                    // Handle the scenario where initialization failed
+                    MessageBox.Show("Initialization failed. Please ensure Steam is running and ARK is installed.", "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during initialization: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // Refresh Button Click Event Handler
@@ -106,7 +135,7 @@ namespace AsaModCleaner
             var processedMods = 0;
 
             var installDir = _gameService.GetArkInstallDir(); 
-            var modPath = Path.Combine(installDir!, "ShooterGame", "Binaries", "Win64", "ShooterGame", "Mods");
+            var modPath = _gameService.GetModsPath(installDir!);
 
             while (_modsToCleanQueue.Count > 0)
             {
@@ -184,13 +213,6 @@ namespace AsaModCleaner
 
         private void LoadModList()
         {
-            var installed = _gameService.IsArkInstalled();
-            if (!installed)
-            {
-                MessageBox.Show("ARK: Survival Ascended is not installed");
-                return;
-            }
-
             var installDir = _gameService.GetArkInstallDir();
             if (string.IsNullOrWhiteSpace(installDir)) return;
             var modLibrary = _gameService.DeserializeModLibrary(installDir);
@@ -207,7 +229,7 @@ namespace AsaModCleaner
             ModList.ItemsSource = installedMods; // Re-assign to refresh the ListView
 
             // Optional: Update status
-            StatusLabel.Text = $"{installedMods?.Count} mods loaded.";
+            StatusLabel.Text = $"{installedMods.Count} mods loaded.";
         }
     }
 }

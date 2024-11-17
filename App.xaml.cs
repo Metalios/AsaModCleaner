@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
 using System.Windows;
-using AsaModCleaner.Handlers;
 using AsaModCleaner.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,9 +35,7 @@ namespace AsaModCleaner
                 })
                 .ConfigureServices((context, services) =>
                 {
-                    services.AddSingleton<ISteamHandler, SteamHandler>(); // Register the SteamHandler for use via ISteamHandler
                     services.AddSingleton<GameService>(); // Register GameService
-                    services.AddHostedService<SteamHandler>(); // Register SteamHandler as a hosted background service
                     services.AddSingleton<MainWindow>(); // Register your main window with DI
                 })
                 .Build();

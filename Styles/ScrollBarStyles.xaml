@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ScrollBar Style for a Dark Grey and Green Theme -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid x:Name="Root">
+                        <!-- Track -->
+                        <Track x:Name="PART_Track" IsDirectionReversed="True">
+                            <!-- Thumb -->
+                            <Track.Thumb>
+                                <Thumb x:Name="Thumb" Background="LimeGreen" Width="10" Height="10" />
+                            </Track.Thumb>
+                            <!-- Increase and Decrease Repeat Buttons -->
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton x:Name="DecreaseButton" Background="DarkGray" Height="10" Width="10" />
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton x:Name="IncreaseButton" Background="DarkGray" Height="10" Width="10" />
+                            </Track.IncreaseRepeatButton>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!-- Set Default Colors to Match the Theme -->
+        <Setter Property="Foreground" Value="LimeGreen" /> <!-- Thumb Color -->
+        <Setter Property="Background" Value="DarkGray" /> <!-- Track Background -->
+    </Style>
+
+    <!-- Custom ScrollViewer Style to Use the Custom ScrollBar -->
+    <Style TargetType="ScrollViewer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Grid>
+                        <!-- Define Columns and Rows for ScrollViewer -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />   <!-- Main content area -->
+                            <ColumnDefinition Width="Auto" /> <!-- Vertical scrollbar -->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />    <!-- Main content area -->
+                            <RowDefinition Height="Auto" /> <!-- Horizontal scrollbar -->
+                        </Grid.RowDefinitions>
+
+                        <!-- Scroll Content Presenter -->
+                        <ScrollContentPresenter Grid.Column="0" Grid.Row="0" Margin="0" />
+
+                        <!-- Vertical ScrollBar -->
+                        <ScrollBar
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Width="14"
+                            Name="PART_VerticalScrollBar"
+                            Value="{TemplateBinding VerticalOffset}"
+                            Maximum="{TemplateBinding ScrollableHeight}"
+                            ViewportSize="{TemplateBinding ViewportHeight}"
+                            Orientation="Vertical"
+                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                        <!-- The vertical scrollbar should be placed in row 0 and column 1 -->
+
+                        <!-- Horizontal ScrollBar -->
+                        <ScrollBar
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Height="14"
+                            Name="PART_HorizontalScrollBar"
+                            Value="{TemplateBinding HorizontalOffset}"
+                            Maximum="{TemplateBinding ScrollableWidth}"
+                            ViewportSize="{TemplateBinding ViewportWidth}"
+                            Orientation="Horizontal"
+                            Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                        <!-- The horizontal scrollbar should be placed in row 1 and column 0 -->
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

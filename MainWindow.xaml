@@ -6,20 +6,17 @@
         xmlns:local="clr-namespace:AsaModCleaner"
         mc:Ignorable="d"
         Title="ASA Mod Cleaner" Height="600" Width="800" WindowStyle="ThreeDBorderWindow" Icon="Assets/asa_mod_cleaner.ico">
+    
     <Window.Resources>
-        <!-- Style to prevent ListViewItems from being visually selected -->
-        <Style TargetType="ListViewItem">
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="IsHitTestVisible" Value="True"/> <!-- Ensure child elements can still be interacted with -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
-                        <ContentPresenter /> <!-- Render the item without any selection visuals -->
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Link ScrollBar and ListViewItem Styles -->
+                <ResourceDictionary Source="/Styles/ScrollBarStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/ListViewItemStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
+
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="WhiteSmoke"/>
@@ -45,15 +42,24 @@
             <Border.Effect>
                 <DropShadowEffect/>
             </Border.Effect>
-            <StackPanel>
-                <TextBlock Text="Installed Mods" FontSize="20" Foreground="WhiteSmoke" Margin="10" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Content="Select All" Width="70" Height="22" HorizontalAlignment="Left" Background="LightBlue"
-                        Foreground="Black" FontWeight="Bold" Click="SelectAllButton_Click" Margin="10,0,0,10"/>
-                <Button Content="Refresh" Width="70" Height="22" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10"
-                        Background="Turquoise" BorderThickness="0" Foreground="Black" FontWeight="Bold" Click="RefreshButton_Click"/>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> <!-- Header and buttons -->
+                    <RowDefinition Height="Auto"/> <!-- Select All and Refresh buttons -->
+                    <RowDefinition Height="*"/>   <!-- ListView that should take remaining space -->
+                </Grid.RowDefinitions>
+
+                <!-- Installed Mods Header -->
+                <TextBlock Text="Installed Mods" FontSize="20" Foreground="WhiteSmoke" Margin="10" Grid.Row="0"/>
+
+                <!-- Select All and Refresh Buttons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Margin="10,0,0,10">
+                    <Button x:Name="SelectAllButton" Content="Select All" Width="70" Height="22" Background="LightBlue" Foreground="Black" FontWeight="Bold" Click="SelectAllButton_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="RefreshButton" Content="Refresh" Width="70" Height="22" Background="Turquoise" BorderThickness="0" Foreground="Black" FontWeight="Bold" Click="RefreshButton_Click"/>
                 </StackPanel>
-                <ListView x:Name="ModList" Margin="10" Background="#3E3E3E" BorderThickness="0">
+
+                <!-- Mod List -->
+                <ListView x:Name="ModList" Margin="10" Background="#3E3E3E" BorderThickness="0" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
@@ -71,14 +77,14 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackPanel>
+            </Grid>
         </Border>
 
         <!-- Progress Bar -->
         <ProgressBar x:Name="CleaningProgressBar" Height="20" Margin="20,0,20,80" VerticalAlignment="Bottom" Visibility="Collapsed"/>
 
         <!-- Clean Button -->
-        <Button Content="Clean" Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,16"
+        <Button x:Name="CleanButton" Content="Clean" Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,16"
                 Background="LimeGreen" BorderThickness="0" Foreground="Black" FontWeight="Bold" FontSize="20" Click="CleanButton_Click">
             <Button.Effect>
                 <DropShadowEffect/>
