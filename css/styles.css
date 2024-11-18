@@ -1,0 +1,101 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+    background: #f4f4f4;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+}
+
+header .logo {
+    width: 120px;
+    margin-bottom: 1rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+header .cta-button {
+    background: #e63946;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+header .cta-button:hover {
+    background: #c92335;
+}
+
+/* Main Sections */
+main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #444;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Lists */
+ul, ol {
+    margin: 1rem 0;
+    padding: 0 1.5rem;
+}
+
+ul li, ol li {
+    margin-bottom: 0.8rem;
+}
+
+/* FAQ */
+.faq-item {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+}
+
+.faq-item h3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.faq-item p {
+    margin: 0.5rem 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: #333;
+    color: #fff;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
