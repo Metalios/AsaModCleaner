@@ -36,7 +36,7 @@ ARK: Survival Ascended's **Cosmetic Dynamic Downloading** can automatically inst
 2. Make sure you have **.NET 8 Desktop runtime** installed.
 3. **Launch ASA Mod Cleaner**, and it will automatically detect your ARK installation directory.
 4. Choose whether to **clean all mods** or **select the mods** you want to remove.
-5. After uninstalling mods, **exit to the main menu** and reconnect to your server or single-player instance—there is no need to fully restart the game.
+5. After uninstalling mods, **exit to the main menu** and reconnect to your server or single-player instanceï¿½there is no need to fully restart the game.
 
 ### Important Note
 - The **Cosmetic Dynamic Downloading disabling feature** is currently on the roadmap. When available, ASA Mod Cleaner will ensure that ARK is **not running** before performing this operation.
