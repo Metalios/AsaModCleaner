@@ -59,7 +59,7 @@
                 </StackPanel>
 
                 <!-- Mod List -->
-                <ListView x:Name="ModList" Margin="10" Background="#3E3E3E" BorderThickness="0" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="ModList" Margin="10" Background="#3E3E3E" BorderThickness="0" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">

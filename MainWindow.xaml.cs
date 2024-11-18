@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using AsaModCleaner.Models;
 using AsaModCleaner.Services;
 using Microsoft.Extensions.Logging;
@@ -66,6 +67,7 @@ namespace AsaModCleaner
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             LoadModList();
+            ScrollToTop(ModList);
         }
 
         private void SelectAllButton_Click(object sender, RoutedEventArgs e)
@@ -230,6 +232,15 @@ namespace AsaModCleaner
 
             // Optional: Update status
             StatusLabel.Text = $"{installedMods.Count} mods loaded.";
+        }
+
+        private void ScrollToTop(ListView listView)
+        {
+            if (VisualTreeHelper.GetChildrenCount(listView) <= 0) return;
+            var border = (Border?)VisualTreeHelper.GetChild(listView, 0);
+            if (border is null || VisualTreeHelper.GetChildrenCount(border) <= 0) return;
+            var scrollViewer = (ScrollViewer?)VisualTreeHelper.GetChild(border, 0);
+            scrollViewer?.ScrollToTop(); // Ensure the scrollbar starts at the top
         }
     }
 }
