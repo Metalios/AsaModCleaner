@@ -13,7 +13,7 @@
     <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>
     <MinVerAutoIncrement>minor</MinVerAutoIncrement> <!-- Increment version based on changes -->
     <MinVerTagPrefix>v</MinVerTagPrefix> <!-- Set Git tag prefix -->
-    <MinVerVerbosity>normal</MinVerVerbosity> <!-- Optional logging verbosity -->
+	<MinVerVerbosity>normal</MinVerVerbosity> <!-- Optional logging verbosity -->
   </PropertyGroup>
 
   <ItemGroup>
