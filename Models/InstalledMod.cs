@@ -22,6 +22,30 @@ namespace AsaModCleaner.Models
         [JsonProperty("details")]
         public ModDetails? Details { get; set; }
 
+        [JsonProperty("latestUpdatedFile")]
+        public FileDetails? LatestUpdatedFile { get; set; }
+
+        [JsonProperty("dateCreated")]
+        public string? DateCreated { get; set; }
+
+        [JsonProperty("dateModified")]
+        public string? DateModified { get; set; }
+
+        [JsonProperty("dateReleased")]
+        public string? DateReleased { get; set; }
+
+        [JsonProperty("allowModDistribution")]
+        public bool AllowModDistribution { get; set; }
+
+        [JsonProperty("isAvailable")]
+        public bool IsAvailable { get; set; }
+
+        [JsonProperty("ratingDetails")]
+        public RatingDetails? RatingDetails { get; set; }
+
+        [JsonProperty("premiumDetails")]
+        public PremiumDetails? PremiumDetails { get; set; }
+
         public string DateInstalledLocal
         {
             get
