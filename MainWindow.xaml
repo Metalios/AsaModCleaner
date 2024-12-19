@@ -19,6 +19,9 @@
             <!-- Inline Converters -->
             <converters:CategoryNameConverter x:Key="CategoryNameConverter"/>
             <converters:PremiumToTextConverter x:Key="PremiumToTextConverter"/>
+
+            <!-- CollectionViewSource for Sorting -->
+            <CollectionViewSource x:Key="ModsCollectionView" Source="{Binding InstalledMods}"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -61,10 +64,31 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Margin="10,0,0,10">
                     <Button x:Name="SelectAllButton" Content="Select All" Width="70" Height="22" Background="LightBlue" Foreground="Black" FontWeight="Bold" Click="SelectAllButton_Click" Margin="0,0,10,0"/>
                     <Button x:Name="RefreshButton" Content="Refresh" Width="70" Height="22" Background="Turquoise" BorderThickness="0" Foreground="Black" FontWeight="Bold" Click="RefreshButton_Click"/>
+
+                    <!-- Sort Dropdown -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="Sort By:" Margin="20,0,5,0" Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="14" />
+                        <ComboBox x:Name="SortCriteriaDropdown" Width="100" Height="25" Background="#2E2E2E" Foreground="Black" FontSize="14" SelectionChanged="SortCriteriaDropdown_SelectionChanged">
+                            <ComboBoxItem Content="Install Date" Tag="InstallDate" IsSelected="True"/>
+                            <ComboBoxItem Content="Name" Tag="Name"/>
+                            <ComboBoxItem Content="Author" Tag="Author"/>
+                            <ComboBoxItem Content="Free Mods" Tag="Free"/>
+                            <ComboBoxItem Content="Premium Mods" Tag="Premium"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Sort Direction Dropdown -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="Direction:" Margin="10,0,5,0" Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="14" />
+                        <ComboBox x:Name="SortDirectionDropdown" Width="105" Height="25" Background="#2E2E2E" Foreground="Black" FontSize="14" SelectionChanged="SortDirectionDropdown_SelectionChanged">
+                            <ComboBoxItem Content="Ascending ↑" Tag="Ascending" IsSelected="True"/>
+                            <ComboBoxItem Content="Descending ↓" Tag="Descending"/>
+                        </ComboBox>
+                    </StackPanel>
                 </StackPanel>
 
                 <!-- Mod List -->
-                <ListView Grid.Row="2" x:Name="ModList" ItemsSource="{Binding InstalledMods}" Margin="10" Background="#3E3E3E">
+                <ListView Grid.Row="2" x:Name="ModList" ItemsSource="{Binding Source={StaticResource ModsCollectionView}}" Margin="10" Background="#3E3E3E">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" Margin="5" Background="#3E3E3E">
@@ -79,19 +103,27 @@
                                                Foreground="White" TextWrapping="Wrap"/>
                                 </StackPanel>
 
-                                <!-- Installed Date -->
-                                <TextBlock Text="Installed On: " FontWeight="Light" FontSize="12" 
-                                           Foreground="LightGray" TextWrapping="Wrap" Margin="25,0,0,0">
-                                    <TextBlock.Inlines>
-                                        <Run Text="{Binding DateInstalledLocal, Mode=OneWay}" Foreground="LightBlue"/>
-                                    </TextBlock.Inlines>
-                                </TextBlock>
-
                                 <!-- Mod Type (Category Name) -->
                                 <TextBlock Text="Mod Type: " FontWeight="Light" FontSize="12" Foreground="LightGray" Margin="25,0,0,0">
                                     <TextBlock.Inlines>
                                         <Run Text="{Binding Details.Categories, Converter={StaticResource CategoryNameConverter}}" 
                                              Foreground="LightGreen" />
+                                    </TextBlock.Inlines>
+                                </TextBlock>
+
+                                <!-- Author -->
+                                <TextBlock Text="Author: " FontWeight="Light" FontSize="12" 
+                                           Foreground="LightGray" TextWrapping="Wrap" Margin="25,0,0,0">
+                                    <TextBlock.Inlines>
+                                        <Run Text="{Binding Details.Authors[0].Name, Mode=OneWay}" Foreground="Khaki"/>
+                                    </TextBlock.Inlines>
+                                </TextBlock>
+
+                                <!-- Installed Date -->
+                                <TextBlock Text="Installed On: " FontWeight="Light" FontSize="12" 
+                                           Foreground="LightGray" TextWrapping="Wrap" Margin="25,0,0,0">
+                                    <TextBlock.Inlines>
+                                        <Run Text="{Binding DateInstalledLocal, Mode=OneWay}" Foreground="LightBlue"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
 

@@ -44,7 +44,7 @@ namespace AsaModCleaner.Models
                         System.Globalization.DateTimeStyles.None, out var dateTime))
                 {
                     // Convert to local time and return just the date in the user's local format
-                    return dateTime.ToLocalTime().ToString("d"); // "D" for long date pattern
+                    return dateTime.ToLocalTime().ToString("G"); // "D" for long date pattern
                 }
                 return DateInstalled ?? "Unknown";
             }
