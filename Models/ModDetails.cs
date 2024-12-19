@@ -19,26 +19,11 @@ namespace AsaModCleaner.Models
         [JsonProperty("slug")]
         public string? Slug { get; set; }
 
-        [JsonProperty("summary")]
-        public string? Summary { get; set; }
-
         [JsonProperty("links")]
         public ModLinks? Links { get; set; }
 
-        [JsonProperty("categories")]
-        public List<Category>? Categories { get; set; }
-
-        [JsonProperty("authors")]
-        public List<Author>? Authors { get; set; }
-
-        [JsonProperty("logo")]
-        public Media? Logo { get; set; }
-
-        [JsonProperty("screenshots")]
-        public List<Media>? Screenshots { get; set; }
-
-        [JsonProperty("videos")]
-        public List<Media>? Videos { get; set; }
+        [JsonProperty("summary")]
+        public string? Summary { get; set; }
 
         [JsonProperty("status")]
         public string? Status { get; set; }
@@ -54,5 +39,50 @@ namespace AsaModCleaner.Models
 
         [JsonProperty("primaryCategoryId")]
         public int PrimaryCategoryId { get; set; }
+
+        [JsonProperty("categories")]
+        public List<ModCategory>? Categories { get; set; }
+
+        [JsonProperty("authors")]
+        public List<Author>? Authors { get; set; }
+
+        [JsonProperty("logo")]
+        public ModLogo? Logo { get; set; }
+
+        [JsonProperty("screenshots")]
+        public List<object>? Screenshots { get; set; }
+
+        [JsonProperty("videos")]
+        public List<object>? Videos { get; set; }
+
+        [JsonProperty("mainFileId")]
+        public int MainFileId { get; set; }
+
+        [JsonProperty("latestFiles")]
+        public List<ModFile>? LatestFiles { get; set; }
+
+        [JsonProperty("latestFilesIndexes")]
+        public List<LatestFileIndex>? LatestFilesIndexes { get; set; }
+
+        [JsonProperty("dateCreated")]
+        public string? DateCreated { get; set; }
+
+        [JsonProperty("dateModified")]
+        public string? DateModified { get; set; }
+
+        [JsonProperty("dateReleased")]
+        public string? DateReleased { get; set; }
+
+        [JsonProperty("allowModDistribution")]
+        public bool AllowModDistribution { get; set; }
+
+        [JsonProperty("isAvailable")]
+        public bool IsAvailable { get; set; }
+
+        [JsonProperty("ratingDetails")]
+        public RatingDetails? RatingDetails { get; set; }
+
+        [JsonProperty("premiumDetails")]
+        public PremiumDetails? PremiumDetails { get; set; }
     }
 }

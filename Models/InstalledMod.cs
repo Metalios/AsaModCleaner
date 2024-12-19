@@ -1,9 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace AsaModCleaner.Models
 {
-    public class InstalledMod
+    public class InstalledMod : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         [JsonProperty("dateInstalled")]
         public string? DateInstalled { get; set; }
 
@@ -22,29 +26,14 @@ namespace AsaModCleaner.Models
         [JsonProperty("details")]
         public ModDetails? Details { get; set; }
 
+        [JsonProperty("installedFile")]
+        public ModFile? InstalledFile { get; set; }
+
         [JsonProperty("latestUpdatedFile")]
-        public FileDetails? LatestUpdatedFile { get; set; }
+        public ModFile? LatestUpdatedFile { get; set; }
 
-        [JsonProperty("dateCreated")]
-        public string? DateCreated { get; set; }
-
-        [JsonProperty("dateModified")]
-        public string? DateModified { get; set; }
-
-        [JsonProperty("dateReleased")]
-        public string? DateReleased { get; set; }
-
-        [JsonProperty("allowModDistribution")]
-        public bool AllowModDistribution { get; set; }
-
-        [JsonProperty("isAvailable")]
-        public bool IsAvailable { get; set; }
-
-        [JsonProperty("ratingDetails")]
-        public RatingDetails? RatingDetails { get; set; }
-
-        [JsonProperty("premiumDetails")]
-        public PremiumDetails? PremiumDetails { get; set; }
+        [JsonProperty("dynamicContent")]
+        public bool DynamicContent { get; set; }
 
         public string DateInstalledLocal
         {
@@ -61,6 +50,22 @@ namespace AsaModCleaner.Models
             }
         }
 
-        public bool IsSelected { get; set; }
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected == value) return;
+                _isSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Notify UI about property changes
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace AsaModCleaner.Models
 {
-    public class Media
+    public class ModLogo
     {
         [JsonProperty("iD")]
         public int Id { get; set; }
@@ -21,5 +21,8 @@ namespace AsaModCleaner.Models
 
         [JsonProperty("uRL")]
         public string? Url { get; set; }
+
+        [JsonProperty("session")]
+        public int Session { get; set; }
     }
 }

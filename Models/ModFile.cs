@@ -2,7 +2,7 @@
 
 namespace AsaModCleaner.Models
 {
-    public class FileDetails
+    public class ModFile
     {
         [JsonProperty("iD")]
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace AsaModCleaner.Models
         public string? FileStatus { get; set; }
 
         [JsonProperty("hashes")]
-        public List<Hash>? Hashes { get; set; }
+        public List<FileHash>? Hashes { get; set; }
 
         [JsonProperty("fileDate")]
         public string? FileDate { get; set; }
@@ -53,7 +53,7 @@ namespace AsaModCleaner.Models
         public List<SortableGameVersion>? SortableGameVersions { get; set; }
 
         [JsonProperty("dependencies")]
-        public List<string>? Dependencies { get; set; }
+        public List<object>? Dependencies { get; set; }
 
         [JsonProperty("exposeAsAlternative")]
         public bool ExposeAsAlternative { get; set; }
@@ -71,9 +71,9 @@ namespace AsaModCleaner.Models
         public int ServerPackFileId { get; set; }
 
         [JsonProperty("fileFingerprint")]
-        public long FileFingerprint { get; set; }
+        public uint FileFingerprint { get; set; }
 
         [JsonProperty("modules")]
-        public List<Module>? Modules { get; set; }
+        public List<FileModule>? Modules { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace AsaModCleaner.Models
 {
-    public class Category
+    public class ModCategory
     {
         [JsonProperty("iD")]
         public int Id { get; set; }

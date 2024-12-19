@@ -5,7 +5,7 @@ namespace AsaModCleaner.Models
     public class RatingDetails
     {
         [JsonProperty("rating")]
-        public double Rating { get; set; }
+        public float Rating { get; set; }
 
         [JsonProperty("totalRatings")]
         public int TotalRatings { get; set; }

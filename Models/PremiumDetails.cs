@@ -11,7 +11,7 @@ namespace AsaModCleaner.Models
         public bool IsFreemium { get; set; }
 
         [JsonProperty("tierPrice")]
-        public double TierPrice { get; set; }
+        public decimal TierPrice { get; set; }
 
         [JsonProperty("currencySymbol")]
         public string? CurrencySymbol { get; set; }

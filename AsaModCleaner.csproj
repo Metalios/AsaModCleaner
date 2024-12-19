@@ -14,6 +14,7 @@
     <MinVerAutoIncrement>minor</MinVerAutoIncrement> <!-- Increment version based on changes -->
     <MinVerTagPrefix>v</MinVerTagPrefix> <!-- Set Git tag prefix -->
 	<MinVerVerbosity>normal</MinVerVerbosity> <!-- Optional logging verbosity -->
+    <MinVerDefaultPreReleaseIdentifiers>preview</MinVerDefaultPreReleaseIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>

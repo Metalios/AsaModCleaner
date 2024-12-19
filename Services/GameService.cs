@@ -128,14 +128,16 @@ namespace AsaModCleaner.Services
                 // Read the content of the first found library.json file
                 var libraryFile = files[0];
                 var jsonContent = File.ReadAllText(libraryFile);
-                var library = JsonConvert.DeserializeObject<Library>(jsonContent);
 
-                if (library == null)
+                var settings = new JsonSerializerSettings
                 {
-                    _logger.LogWarning("Deserialization of library.json returned null. File may be empty or malformed: {LibraryFile}", libraryFile);
-                }
+                    MissingMemberHandling = MissingMemberHandling.Error,
+                    NullValueHandling = NullValueHandling.Include
+                };
 
-                return library;
+                var modLibrary = JsonConvert.DeserializeObject<Library>(jsonContent, settings);
+
+                return modLibrary;
             }
             catch (Exception e)
             {
