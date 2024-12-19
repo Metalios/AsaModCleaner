@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using AsaModCleaner.Models;
 using AsaModCleaner.Services;
@@ -18,7 +20,11 @@ namespace AsaModCleaner
         private readonly ILogger<MainWindow> _logger;
         private readonly Queue<InstalledMod> _modsToCleanQueue = new();
         
-        public ObservableCollection<InstalledMod> InstalledMods { get; private set; } = new();
+        private string? _selectedSortCriterion = "InstallDate"; // Default criterion
+        private ListSortDirection _selectedSortDirection = ListSortDirection.Ascending; // Default direction
+
+        private ObservableCollection<InstalledMod> InstalledMods { get; set; } = [];
+
 
         public MainWindow(GameService gameService, ILogger<MainWindow> logger)
         {
@@ -215,6 +221,57 @@ namespace AsaModCleaner
             if (border is null || VisualTreeHelper.GetChildrenCount(border) <= 0) return;
             var scrollViewer = (ScrollViewer?)VisualTreeHelper.GetChild(border, 0);
             scrollViewer?.ScrollToTop(); // Ensure the scrollbar starts at the top
+        }
+
+        private void SortCriteriaDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SortCriteriaDropdown.SelectedItem is ComboBoxItem selectedItem)
+            {
+                _selectedSortCriterion = selectedItem.Tag.ToString();
+                ApplySorting();
+            }
+        }
+
+        private void SortDirectionDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SortDirectionDropdown.SelectedItem is ComboBoxItem selectedItem)
+            {
+                _selectedSortDirection = selectedItem.Tag.ToString() == "Ascending"
+                    ? ListSortDirection.Ascending
+                    : ListSortDirection.Descending;
+
+                ApplySorting();
+            }
+        }
+
+        private void ApplySorting()
+        {
+            var collectionView = (CollectionView)CollectionViewSource.GetDefaultView(InstalledMods);
+            collectionView.SortDescriptions.Clear();
+
+            // Apply sorting based on selected criterion and direction
+            switch (_selectedSortCriterion)
+            {
+                case "InstallDate":
+                    collectionView.SortDescriptions.Add(new SortDescription(nameof(InstalledMod.DateInstalled), _selectedSortDirection));
+                    break;
+
+                case "Name":
+                    collectionView.SortDescriptions.Add(new SortDescription("Details.Name", _selectedSortDirection));
+                    break;
+
+                case "Free":
+                    collectionView.SortDescriptions.Add(new SortDescription(nameof(InstalledMod.Details.PremiumDetails.IsPremium), ListSortDirection.Ascending));
+                    break;
+
+                case "Premium":
+                    collectionView.SortDescriptions.Add(new SortDescription(nameof(InstalledMod.Details.PremiumDetails.IsPremium), ListSortDirection.Descending));
+                    break;
+
+                case "Author":
+                    collectionView.SortDescriptions.Add(new SortDescription("Details.Authors[0].Name", _selectedSortDirection));
+                    break;
+            }
         }
     }
 }
