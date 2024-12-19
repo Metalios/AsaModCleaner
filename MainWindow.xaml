@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AsaModCleaner"
         xmlns:converters="clr-namespace:AsaModCleaner.Converters"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="ASA Mod Cleaner" Height="600" Width="800" WindowStyle="ThreeDBorderWindow" Icon="Assets/asa_mod_cleaner.ico">
     
     <Window.Resources>

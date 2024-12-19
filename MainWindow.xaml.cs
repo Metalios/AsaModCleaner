@@ -24,12 +24,13 @@ namespace AsaModCleaner
         private ListSortDirection _selectedSortDirection = ListSortDirection.Ascending; // Default direction
 
         private ObservableCollection<InstalledMod> InstalledMods { get; set; } = [];
+        private readonly ISettingsService _settingsService;
 
-
-        public MainWindow(GameService gameService, ILogger<MainWindow> logger)
+        public MainWindow(GameService gameService, ISettingsService settingsService, ILogger<MainWindow> logger)
         {
             _gameService = gameService;
             _logger = logger;
+            _settingsService = settingsService;
             InitializeComponent();
 
             // Subscribe to the Loaded event
@@ -48,6 +49,7 @@ namespace AsaModCleaner
         {
             try
             {
+                ApplyWindowSettings();
                 EnableButtons(false);
 
                 // Run the initialization logic in a separate thread to avoid blocking the UI
@@ -68,6 +70,24 @@ namespace AsaModCleaner
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred during initialization: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ApplyWindowSettings()
+        {
+            var settings = _settingsService.LoadWindowSettings();
+
+            // Apply position and size if not maximized
+            if (settings.IsMaximized)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                Left = settings.Left;
+                Top = settings.Top;
+                Width = settings.Width;
+                Height = settings.Height;
             }
         }
 
@@ -214,7 +234,7 @@ namespace AsaModCleaner
             StatusLabel.Text = $"{InstalledMods.Count} mods loaded.";
         }
 
-        private void ScrollToTop(ListView listView)
+        private static void ScrollToTop(ListView listView)
         {
             if (VisualTreeHelper.GetChildrenCount(listView) <= 0) return;
             var border = (Border?)VisualTreeHelper.GetChild(listView, 0);
@@ -225,23 +245,19 @@ namespace AsaModCleaner
 
         private void SortCriteriaDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SortCriteriaDropdown.SelectedItem is ComboBoxItem selectedItem)
-            {
-                _selectedSortCriterion = selectedItem.Tag.ToString();
-                ApplySorting();
-            }
+            if (SortCriteriaDropdown.SelectedItem is not ComboBoxItem selectedItem) return;
+            _selectedSortCriterion = selectedItem.Tag.ToString();
+            ApplySorting();
         }
 
         private void SortDirectionDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SortDirectionDropdown.SelectedItem is ComboBoxItem selectedItem)
-            {
-                _selectedSortDirection = selectedItem.Tag.ToString() == "Ascending"
-                    ? ListSortDirection.Ascending
-                    : ListSortDirection.Descending;
+            if (SortDirectionDropdown.SelectedItem is not ComboBoxItem selectedItem) return;
+            _selectedSortDirection = selectedItem.Tag.ToString() == "Ascending"
+                ? ListSortDirection.Ascending
+                : ListSortDirection.Descending;
 
-                ApplySorting();
-            }
+            ApplySorting();
         }
 
         private void ApplySorting()
@@ -272,6 +288,21 @@ namespace AsaModCleaner
                     collectionView.SortDescriptions.Add(new SortDescription("Details.Authors[0].Name", _selectedSortDirection));
                     break;
             }
+        }
+
+        // Save window settings when the application closes
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            var settings = new WindowSettings
+            {
+                Left = Left,
+                Top = Top,
+                Width = Width,
+                Height = Height,
+                IsMaximized = WindowState == WindowState.Maximized
+            };
+
+            _settingsService.SaveWindowSettings(settings);
         }
     }
 }

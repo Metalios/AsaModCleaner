@@ -36,6 +36,7 @@ namespace AsaModCleaner
                 .ConfigureServices((context, services) =>
                 {
                     services.AddSingleton<GameService>(); // Register GameService
+                    services.AddSingleton<ISettingsService, SettingsService>();
                     services.AddSingleton<MainWindow>(); // Register your main window with DI
                 })
                 .Build();
