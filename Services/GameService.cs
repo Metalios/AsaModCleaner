@@ -131,7 +131,7 @@ namespace AsaModCleaner.Services
 
                 var settings = new JsonSerializerSettings
                 {
-                    MissingMemberHandling = MissingMemberHandling.Error,
+                    MissingMemberHandling = MissingMemberHandling.Ignore,
                     NullValueHandling = NullValueHandling.Include
                 };
 
